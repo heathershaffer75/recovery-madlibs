@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recovery Mad Libs: Character Edition</title>
+  <style>
+    body{margin:0;font-family:ui-sans-serif,system-ui;background:#0f172a;color:#e5e7eb}
+    .wrap{max-width:980px;margin:24px auto;padding:0 16px}
+    header{display:flex;gap:20px;padding:18px;background:#111827;border-radius:18px}
+    select,button,input{background:#1e293b;color:#e5e7eb;border-radius:8px;padding:8px;margin:4px}
+    label{display:flex;flex-direction:column;font-size:14px;gap:6px}
+    input::placeholder{color:#9ca3af}
+    .panel{background:#111827;border-radius:18px;padding:18px;margin-top:14px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    @media (max-width:720px){.grid{grid-template-columns:1fr}}
+    .output{white-space:pre-wrap;background:#0b1225;border:1px dashed #334155;padding:16px;border-radius:14px;min-height:120px;margin-top:12px;line-height:1.5}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Recovery Mad Libs: Character Edition</h1>
+    </header>
+
+    <div>
+      <label for="picker">Choose a story</label>
+      <select id="picker">
+        <option value="incident">🍿 Group Room Incident</option>
+        <option value="olympics">🏅 Relapse Prevention Olympics</option>
+        <option value="saturday">🎳 Saturday Special</option>
+        <option value="matinee">🎬 Matinee Mayhem</option>
+        <option value="family">👪 Family Therapy Gone Wild</option>
+        <option value="snack">🍪 The Great Snack Heist</option>
+        <option value="meditation">🧘 Meditation Meltdown</option>
+        <option value="mystery">🔎 Missing Phone Mystery</option>
+        <option value="talent">🎤 Treatment Talent Show</option>
+        <option value="roommates">🛏️ Roommate Chronicles</option>
+        <option value="graduation">🎓 Graduation Day Surprise</option>
+      </select>
+      <button id="randomize">🎲 Random</button>
+      <button id="reveal">🎉 Reveal</button>
+      <button id="reset">↺ Reset</button>
+      <div style="font-size:12px;color:#cbd5e1;margin:6px 4px 0;">Hint: click <strong>🎲 Random</strong> to auto‑fill any empty blanks with playful suggestions.</div>
+    </div>
+
+    <!-- PANELS -->
+    <section id="incident" class="panel" data-story>
+      <h2>🍿 Group Room Incident</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Alex"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Trevor"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., launched"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., spectacular"></label>
+        <label>Place <input name="place" placeholder="e.g., group room"></label>
+        <label>Buzzword <input name="buzz" placeholder="e.g., accountability"></label>
+        <label>Object <input name="object" placeholder="e.g., rubber chicken"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., bewildered"></label>
+        <label>Food <input name="food" placeholder="e.g., popcorn"></label>
+        <label>Sound <input name="sound" placeholder="e.g., blorp-blorp"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="family" class="panel" data-story hidden>
+      <h2>👪 Family Therapy Gone Wild</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Alex"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Emma"></label>
+        <label>Family Member <input name="family" placeholder="e.g., sister"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., set down"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., chaotic"></label>
+        <label>Object <input name="object" placeholder="e.g., traffic cone"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., hopeful"></label>
+        <label>Buzzword <input name="buzz" placeholder="e.g., boundaries"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="snack" class="panel" data-story hidden>
+      <h2>🍪 The Great Snack Heist</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Jordan"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Kyle"></label>
+        <label>Snack <input name="snack" placeholder="e.g., nachos"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., hid"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., hilarious"></label>
+        <label>Object <input name="object" placeholder="e.g., fake mustache"></label>
+        <label>Place <input name="place" placeholder="e.g., snack bar"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., delighted"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="meditation" class="panel" data-story hidden>
+      <h2>🧘 Meditation Meltdown</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Taylor"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Angel"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., dropped"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., awkward"></label>
+        <label>Sound <input name="sound" placeholder="e.g., whoosh"></label>
+        <label>Object <input name="object" placeholder="e.g., stress ball"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., curious"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="mystery" class="panel" data-story hidden>
+      <h2>🔎 Missing Phone Mystery</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Sam"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Tim"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., found"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., mysterious"></label>
+        <label>Place <input name="place" placeholder="e.g., therapy circle"></label>
+        <label>Object <input name="object" placeholder="e.g., deck of Uno cards"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., relieved"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="talent" class="panel" data-story hidden>
+      <h2>🎤 Treatment Talent Show</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Chris"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Michael"></label>
+        <label>Talent <input name="talent" placeholder="e.g., karaoke"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., epic"></label>
+        <label>Song lyric/quote <input name="quote" placeholder="e.g., “Encore!”"></label>
+        <label>Object <input name="object" placeholder="e.g., plastic crown"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., joyful"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="roommates" class="panel" data-story hidden>
+      <h2>🛏️ Roommate Chronicles</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Morgan"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Curt"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., argued"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., confusing"></label>
+        <label>Object <input name="object" placeholder="e.g., water balloon"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., determined"></label>
+        <label>Place <input name="place" placeholder="e.g., dorm room"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="graduation" class="panel" data-story hidden>
+      <h2>🎓 Graduation Day Surprise</h2>
+      <div class="grid" data-fields>
+        <label>Patient <input name="patient1" placeholder="e.g., Jamie"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Dick"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., tossed"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., unbelievable"></label>
+        <label>Object <input name="object" placeholder="e.g., giant teddy bear"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., hopeful"></label>
+        <label>Food <input name="food" placeholder="e.g., cupcakes"></label>
+        <label>Sound <input name="sound" placeholder="e.g., thud"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="olympics" class="panel" data-story hidden>
+      <h2>🏅 Relapse Prevention Olympics</h2>
+      <div class="grid" data-fields>
+        <label>Patient #1 <input name="patient1" placeholder="e.g., Alex"></label>
+        <label>Staff #1 <input name="staff1" placeholder="e.g., Emma"></label>
+        <label>Patient #2 <input name="patient2" placeholder="e.g., Taylor"></label>
+        <label>Staff #2 <input name="staff2" placeholder="e.g., Kyle"></label>
+        <label>Event name <input name="event" placeholder="e.g., Boundary Balance Beam"></label>
+        <label>Silly object <input name="object" placeholder="e.g., rubber chicken"></label>
+        <label>Buzzword <input name="buzz" placeholder="e.g., coping skills"></label>
+        <label>Place <input name="place" placeholder="e.g., rec yard"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., epic"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="saturday" class="panel" data-story hidden>
+      <h2>🎳 Saturday Special</h2>
+      <div class="grid" data-fields>
+        <label>Patient #1 <input name="patient1" placeholder="e.g., Casey"></label>
+        <label>Patient #2 <input name="patient2" placeholder="e.g., Drew"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Angel"></label>
+        <label>Venue <input name="venue" placeholder="e.g., bowling alley"></label>
+        <label>Activity <input name="activity" placeholder="e.g., bowling"></label>
+        <label>Team name <input name="team" placeholder="e.g., The Mindful Ninjas"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., flung"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., wild"></label>
+        <label>Object <input name="object" placeholder="e.g., balloon sword"></label>
+        <label>Snack <input name="snack" placeholder="e.g., pretzel bites"></label>
+        <label>Puzzle/Genre <input name="puzzle" placeholder="e.g., laser maze"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., delighted"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+    <section id="matinee" class="panel" data-story hidden>
+      <h2>🎬 Matinee Mayhem</h2>
+      <div class="grid" data-fields>
+        <label>Patient #1 <input name="patient1" placeholder="e.g., Riley"></label>
+        <label>Patient #2 <input name="patient2" placeholder="e.g., Sam"></label>
+        <label>Staff <input name="staff1" placeholder="e.g., Trevor"></label>
+        <label>Movie Genre <input name="genre" placeholder="e.g., action trailer"></label>
+        <label>Row Letter <input name="row" placeholder="e.g., Row J"></label>
+        <label>Seat Snack <input name="snack" placeholder="e.g., popcorn"></label>
+        <label>Verb (past tense) <input name="verb" placeholder="e.g., spilled"></label>
+        <label>Adjective <input name="adj" placeholder="e.g., sticky"></label>
+        <label>Object <input name="object" placeholder="e.g., soda tsunami"></label>
+        <label>Emotion <input name="emotion" placeholder="e.g., mortified"></label>
+      </div>
+      <div class="output"></div>
+    </section>
+
+  </div>
+
+  <script>
+    const picker=document.getElementById('picker');
+    const panels=[...document.querySelectorAll('[data-story]')];
+    const revealBtn=document.getElementById('reveal');
+    const resetBtn=document.getElementById('reset');
+    const randomBtn=document.getElementById('randomize');
+
+    function showPanel(key){panels.forEach(p=>p.hidden=p.id!==key);} 
+    picker.addEventListener('change',()=>showPanel(picker.value)); 
+    showPanel(picker.value);
+
+    const POOLS={
+      patient:['Alex','Jordan','Taylor','Sam','Chris','Riley','Morgan','Jamie','Casey','Drew'],
+      staff:['Trevor','Emma','Kyle','Angel','Tim','Michael','Curt','Dick'],
+      verb:['launched','dropped','spilled','kicked','hid','flung','balanced','snuck','juggled','tossed'],
+      adj:['spectacular','chaotic','awkward','mysterious','sticky','hilarious','confusing','wild','unbelievable','epic'],
+      place:['group room','cafeteria','meditation hall','rec yard','movie theater','bowling alley','escape room','snack bar','graduation stage','therapy circle'],
+      buzz:['accountability','mindfulness','boundaries','progress not perfection','resilience','gratitude','coping skills','self-care'],
+      object:['rubber chicken','traffic cone','giant teddy bear','balloon sword','deck of Uno cards','fake mustache','kazoo','stress ball','water balloon','plastic crown'],
+      emotion:['bewildered','hopeful','embarrassed','delighted','overwhelmed','curious','relieved','determined','joyful','awkward'],
+      food:['popcorn','nachos','cupcakes','gummy worms','pizza','slushies','chips','donuts','fruit snacks','pretzels'],
+      sound:['blorp-blorp','whoosh','thud','clang','buzz','splat','ding-dong','moo','quack','ribbit'],
+      family:['sister','brother','uncle','cousin','grandma','aunt','dad','mom'],
+      snack:['nachos','candy bar','granola bar','fruit cup','gummy bears','trail mix','ice cream','slushie','pretzel bites','cookies'],
+      talent:['karaoke','stand-up comedy','juggling','breakdancing','beatboxing','magic tricks','mime act','rap battle','poetry slam','air guitar'],
+      quote:['Encore!','Do it again!','Best recovery show ever!','That was amazing!','Drop the mic!','Standing O!','You got this!'],
+      event:['Boundary Balance Beam','Urge-Surfing Sprint','Mindfulness Marathon','Gratitude Relay','Trigger Toss','Coping Skills Curling'],
+      venues:['bowling alley','escape room','movie theater','roller rink','laser tag arena','arcade','karaoke bar','mini golf course'],
+      activities:['bowling','escaping puzzles','watching movies','roller skating','laser tagging','singing karaoke','mini golfing'],
+      puzzles:['laser maze','word lock','blacklight riddle','number grid','mystery box','hidden key','codebreaker wall'],
+      genres:['rom-com','action trailer','documentary','animated feature','horror flick','sci-fi adventure','fantasy epic','musical'],
+      teamnames:['The Mindful Ninjas','Urge-Surfers','Boundary Bosses','Gratitude Squad','Relapse Wrestlers','Calm Crusaders','Sobriety Squad','Hope Dealers']
+    };
+
+    function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+    function randomRow(){return 'Row ' + String.fromCharCode(65+Math.floor(Math.random()*10));}
+
+    randomBtn.addEventListener('click',()=>{
+      const panel=panels.find(p=>!p.hidden); if(!panel) return;
+      panel.querySelectorAll('input').forEach(i=>{
+        if(i.value.trim()) return;
+        switch(i.name){
+          case 'patient1':
+          case 'patient2': i.value = pick(POOLS.patient); break;
+          case 'staff1':
+          case 'staff2': i.value = pick(POOLS.staff); break;
+          case 'family': i.value = pick(POOLS.family); break;
+          case 'verb': i.value = pick(POOLS.verb); break;
+          case 'adj': i.value = pick(POOLS.adj); break;
+          case 'place': i.value = pick(POOLS.place); break;
+          case 'buzz': i.value = pick(POOLS.buzz); break;
+          case 'object': i.value = pick(POOLS.object); break;
+          case 'emotion': i.value = pick(POOLS.emotion); break;
+          case 'food': i.value = pick(POOLS.food); break;
+          case 'sound': i.value = pick(POOLS.sound); break;
+          case 'snack': i.value = pick(POOLS.snack); break;
+          case 'talent': i.value = pick(POOLS.talent); break;
+          case 'quote': i.value = pick(POOLS.quote); break;
+          case 'event': i.value = pick(POOLS.event); break;
+          case 'venue': i.value = pick(POOLS.venues); break;
+          case 'activity': i.value = pick(POOLS.activities); break;
+          case 'team': i.value = pick(POOLS.teamnames); break;
+          case 'puzzle': i.value = pick(POOLS.puzzles.concat(POOLS.genres)); break;
+          case 'genre': i.value = pick(POOLS.genres); break;
+          case 'row': i.value = randomRow(); break;
+        }
+      });
+    });
+
+    function reveal(){
+      const id=picker.value; 
+      const p=document.getElementById(id);
+      const v=Object.fromEntries([...p.querySelectorAll('input')].map(i=>[i.name,i.value]));
+      let text="";
+      switch(id){
+        case 'incident': text=`Yesterday, ${v.patient1} and ${v.staff1} were in the ${v.place} when things got out of hand. Someone ${v.verb} a ${v.object}, and the group gasped. It was the most ${v.adj} moment of the week. The counselor shouted “${v.buzz}!” but it didn’t help—the room filled with the smell of ${v.food} and the sound of ${v.sound}. Everyone felt ${v.emotion}.
+
+The incident grew stranger when the ${v.object} refused to stay put. ${v.patient1} tried to calm things down with ${v.food}, but that only made the ${v.sound} louder. ${v.staff1} scribbled on the whiteboard: “Practice ${v.buzz}!”—and somehow, against all odds, the group actually laughed and leaned into recovery.
+
+By cleanup time, ${v.staff1} explained how this was a lesson in resilience. ${v.patient1} admitted that even though they felt ${v.emotion}, they learned something. The ${v.place} never looked quite the same after that day, and neither did the group.
+
+Reflection closed with the group agreeing that sometimes recovery looks chaotic, sounds like ${v.sound}, and still tastes like ${v.food}.`; break;
+
+        case 'family': text=`In family therapy, ${v.patient1} and their ${v.family} argued until ${v.staff1} ${v.verb} a ${v.object}. The whole room went silent, then erupted in ${v.adj} commentary. Someone muttered “${v.buzz},” which oddly broke the tension.
+
+Later, the group circled up. ${v.patient1} admitted to feeling ${v.emotion}. The ${v.family} confessed they were just scared. By the end, the ${v.object} was passed around like a sacred talking stick, and recovery—messy as it was—suddenly felt possible.
+
+Afterward, the therapist pointed out how humor softened the conflict. ${v.staff1} admitted the ${v.object} wasn’t part of any curriculum, but it worked. People chuckled, realizing that sometimes accidents carry lessons.
+
+Closing the session, ${v.patient1} and the ${v.family} hugged awkwardly, but it was progress—proof that even the strangest props can spark healing.`; break;
+
+        case 'snack': text=`The snack heist began when ${v.patient1} saw ${v.staff1} ${v.verb} a ${v.snack}. A ${v.object} fell across the ${v.place}, sparking chaos. It was ${v.adj}.
+
+But then the circle gathered. They named feelings: ${v.emotion}, hunger, curiosity. Sharing the ${v.snack} became a metaphor for community. ${v.staff1} called it a “teachable moment.” Everyone called it delicious.
+
+Later, people laughed about the dramatic rescue of the ${v.snack}. ${v.patient1} confessed they hadn’t laughed that hard in weeks. The ${v.place} felt lighter.
+
+By evening reflection, the group agreed: sometimes joy is hidden inside spilled snacks, and recovery can taste like ${v.snack}.`; break;
+
+        case 'meditation': text=`During meditation, ${v.patient1} ${v.verb} a ${v.object}, and the ${v.sound} echoed. The vibe grew ${v.adj} as ${v.staff1} encouraged the group to notice, not judge.
+
+Eventually, even ${v.patient1} admitted feeling ${v.emotion}. Giggles gave way to calm breathing, and the meditation ended with unexpected clarity.
+
+Afterward, ${v.staff1} reframed the moment: mistakes are part of mindfulness. The ${v.object} turned into a symbol of resilience, reminding everyone that even chaos can be observed.
+
+The group left quieter, carrying both the ${v.sound} and the silence with them into the day.`; break;
+
+        case 'mystery': text=`In the ${v.place}, a phone vanished. ${v.patient1} glared at ${v.staff1} after someone ${v.verb} a ${v.object}. It felt ${v.adj}.
+
+After a search and some awkward laughs, the missing phone turned up. The real lesson: trust, honesty, and laughing off ${v.emotion} can be more useful than blame.
+
+The recap circled back to communication. ${v.staff1} emphasized curiosity over accusation. ${v.patient1} nodded slowly, still holding the ${v.object}.
+
+By the end, the ${v.place} felt less suspicious and more united—proof that even small mysteries can uncover big truths.`; break;
+
+        case 'talent': text=`At the talent show, ${v.patient1} watched ${v.staff1} perform ${v.talent} with a ${v.object}. It was ridiculously ${v.adj}. “${v.quote}!” someone shouted, and the room clapped.
+
+People shared their own talents. Courage rose. ${v.emotion} spread, and the ${v.object} became a prop in three more acts.
+
+Later, ${v.patient1} admitted they almost didn’t sign up. Watching ${v.staff1} gave them courage. ${v.object} became a running joke, reappearing in skits.
+
+The show ended not with applause, but with connection—proof that creativity feeds recovery as much as any coping skill.`; break;
+
+        case 'roommates': text=`Roommates ${v.patient1} and ${v.staff1} ${v.verb} over a ${v.object} in the ${v.place}. Tensions rose, voices echoed, and it grew ${v.adj}.
+
+Finally, they slowed down. Feelings were named: mostly ${v.emotion}. Boundaries were set. The ${v.object} ended up on the chore chart as a symbol of compromise.
+
+That night, the group reflected on boundaries. ${v.patient1} realized conflict doesn’t have to mean disconnection. ${v.staff1} admitted sharing space is hard, even in recovery.
+
+The ${v.place} became more than just a room—it became a classroom for learning how to live together.`; break;
+
+        case 'graduation': text=`At graduation, ${v.patient1} and ${v.staff1} ${v.verb} a ${v.object}. The ${v.food} went flying, a ${v.sound} boomed, and everything felt ${v.adj}.
+
+Yet ${v.patient1} said they felt ${v.emotion} most of all. Someone quoted, “Take what works, leave the rest.” The ${v.object} became an accidental confetti cannon—and a perfect metaphor for recovery.
+
+The group clapped and laughed, and even the staff teared up. ${v.staff1} said it was the most memorable send-off in years.
+
+The ceremony ended with sticky floors, full hearts, and a reminder that recovery deserves celebration, no matter how messy.`; break;
+
+        case 'olympics': text=`The crowd roared as ${v.patient1} faced ${v.staff1} in the ${v.event}. ${v.patient2} and ${v.staff2} fought over a ${v.object} in the ${v.place}. “${v.buzz}!” echoed everywhere.
+
+After chaos and laughter, medals were awarded for teamwork and trying. The mood? ${v.adj}. The lesson? Even ${v.emotion} can win gold.
+
+In the debrief circle, ${v.staff1} joked that Olympic sports should include chore charts. ${v.patient1} held their medal proudly.
+
+The event ended with cheers, breathing exercises, and the knowledge that sometimes, the hardest event is just staying present.`; break;
+
+        case 'saturday': text=`${v.patient1} and ${v.patient2} made Phase and headed with ${v.staff1} to the ${v.venue}. Their team, “${v.team},” started ${v.activity}. Then someone ${v.verb} a ${v.object}. The vibe turned ${v.adj} fast.
+
+Snacks (${v.snack}) appeared, and a ${v.puzzle} challenge broke out. Feelings were shared: lots of ${v.emotion}. The ride back was filled with stories, laughter, and the sense that recovery is an adventure best done together.
+
+Later, ${v.staff1} reflected that Saturdays show how joy and practice mix. ${v.patient1} and ${v.patient2} agreed, saying the ${v.venue} felt like a safe test run for life.
+
+By evening, the story of the ${v.object} mishap was legend, and everyone had learned that ${v.emotion} is easier when shared.`; break;
+
+        case 'matinee': {
+          const row = v.row || ('Row ' + String.fromCharCode(65+Math.floor(Math.random()*10)));
+          text = `At the matinee, ${v.patient1} and ${v.patient2} went with ${v.staff1} to see a ${v.genre}. Their seats in ${row} seemed safe—until someone ${v.verb} a ${v.object}. The aisle turned ${v.adj}. The ${v.snack} flew.
+
+When the credits rolled, ${v.patient1} admitted feeling ${v.emotion}. Everyone agreed it was the best worst movie trip ever.
+
+Back at the center, the group laughed retelling the story. ${v.staff1} said it showed how recovery can be both dramatic and funny.
+
+Even days later, the ${v.genre} film became shorthand for “remember when,” proving that even sticky moments can become bonding stories.`; 
+          break;
+        }
+      }
+      p.querySelector('.output').textContent = text;
+    }
+    revealBtn.addEventListener('click',reveal);
+
+    function resetVisible(){
+      const p=panels.find(p=>!p.hidden);
+      if(!p) return;
+      p.querySelectorAll('input').forEach(i=>i.value='');
+      p.querySelector('.output').textContent='';
+    }
+    resetBtn.addEventListener('click',resetVisible);
+  </script>
+</body>
+</html>
